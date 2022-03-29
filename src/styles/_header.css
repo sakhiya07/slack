@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: end;
+  background-color: rgb(53, 13, 54);
+}
+
+.profile-picture-header {
+  margin: 4px;
+}

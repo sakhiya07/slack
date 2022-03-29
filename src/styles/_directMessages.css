@@ -1,0 +1,38 @@
+.chat-list {
+  margin: 24px 0px;
+}
+
+.chat-header {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.chat-plus-sign {
+  height: 20px;
+  width: 20px;
+  justify-self: flex-end;
+  margin-right: 8px;
+  margin-left: auto;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.chats {
+  list-style-type: none;
+  padding-left: 0px;
+  margin: 0%;
+}
+
+.chats li {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  cursor: pointer;
+  padding-left: 24px;
+}
+
+.chat-name {
+  padding-left: 4px;
+}

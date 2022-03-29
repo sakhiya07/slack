@@ -1,0 +1,28 @@
+.message-input {
+  margin: 0px 16px;
+  background-color: hsl(220, 14%, 95%);
+  height: 5%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.message-input input {
+  margin: 8px;
+  border-radius: 4px;
+  border: none;
+  height: 24px;
+  position: absolute;
+  width: 94%;
+  right: 4%;
+  background-color: white;
+}
+
+.message-input img {
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  padding-left: 8px;
+  position: absolute;
+  right: 1%;
+}

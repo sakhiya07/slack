@@ -1,0 +1,51 @@
+.new-chat-modal {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: hsl(0, 0%, 100%);
+  z-index: 1000;
+  width: 520px;
+  border-radius: 4px;
+}
+
+.new-chat-modal-titlebar {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 24px;
+}
+
+.new-chat-modal-close-button {
+  margin-left: auto;
+  font-size: 36;
+  cursor: pointer;
+}
+
+.new-chat-modal-form-container {
+  padding: 24px;
+  padding-top: 0;
+}
+
+.new-chat-modal-form-container label {
+  font-weight: 600;
+}
+
+.new-chat-modal-form-container input {
+  width: 100%;
+  margin: 16px 0px;
+  display: block;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.new-chat-modal-form-container button {
+  height: 32px;
+  border: none;
+  padding: 4px 8px;
+}
+
+.align-center-button {
+  margin-top: 8px;
+  text-align: center;
+}

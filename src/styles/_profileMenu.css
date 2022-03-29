@@ -1,0 +1,24 @@
+.profile-menu-modal {
+  position: fixed;
+  top: 42px;
+  right: 8px;
+  background-color: hsl(0, 0%, 100%);
+  z-index: 1000;
+  width: 260px;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.profile-menu-detail {
+  display: flex;
+  align-items: center;
+}
+
+.profile-menu-detail-name {
+  margin-left: 8px;
+}
+
+.profile-menu-signout {
+  margin-top: 8px;
+  cursor: pointer;
+}

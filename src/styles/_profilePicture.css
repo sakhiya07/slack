@@ -1,0 +1,9 @@
+.profile-picture img {
+  border-radius: 2px;
+  margin-right: 4px;
+}
+
+.profile-picture {
+  display: flex;
+  align-items: center;
+}
