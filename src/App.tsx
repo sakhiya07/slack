@@ -3,29 +3,27 @@ import Login from "./components/Login";
 
 import Slack from "./components/Slack";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 
 import { personType } from "./types";
 
 import UserProvider from "./UserProvider";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState<personType>(
-    {} as personType
-  );
+  const [loggedInUser, setLoggedInUser] = useState<personType| undefined>();
 
-  const loginUser = (user: personType) => {
+  const loginUser = useCallback((user: personType) => {
     setLoggedInUser(user);
-  };
+  }, [])
 
   const userProviderValue: [
-    personType,
-    React.Dispatch<React.SetStateAction<personType>>
+    personType | undefined,
+    React.Dispatch<React.SetStateAction<personType | undefined>>
   ] = useMemo(() => [loggedInUser, setLoggedInUser], [loggedInUser]);
 
   return (
     <div className="App">
-      {!loggedInUser.hasOwnProperty("userName") ? (
+      {!loggedInUser ? (
         <Login loginUser={loginUser} />
       ) : (
         <UserProvider value={userProviderValue}>

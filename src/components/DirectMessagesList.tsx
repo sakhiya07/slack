@@ -9,7 +9,6 @@ import { DirectMessagesListPropsType, directMessageType } from "../types";
 // import { checkDirectMessagesListProps } from "../utils";
 
 const DirectMessagesList = (props: DirectMessagesListPropsType) => {
-  console.log("rendered Direct Messages component");
 
   const [isOpenNewDirectMessage, setIsOpenNewDirectMessage] =
     useState<boolean>(false);

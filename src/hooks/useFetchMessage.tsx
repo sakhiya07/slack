@@ -14,7 +14,6 @@ export const useFetchMessage = (
           })
       );
       const data = await response.json();
-      console.log(data);
       if (!data.messages) data.messages = [];
       setMessages(data.messages);
     }, 500);
@@ -40,3 +39,18 @@ export const useFetchMessage = (
 
   return [messages, addMessage];
 };
+
+
+
+// const content = (close) => {
+//   <NewDirectMessagePopUp onClose={close}/>
+// }
+
+// <Modal content={content}>
+
+//  {({open, isOpen}) => {
+// <button onClick={open}/>
+// }}
+
+
+// </Modal>

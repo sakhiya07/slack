@@ -4,12 +4,12 @@ import { channelType, personType } from "../types";
 
 export const useFetchChannels = (): [
   channelType[],
-  (newChannel: channelType) => void,
+  (newChannel: channelType) => Promise<any>,
   (channel: channelType, member: personType) => void,
   (channel: channelType, member: personType) => void,
   (channel: channelType) => void
 ] => {
-  const [loggedUser] = useUser();
+  let [loggedUser] = useUser();
 
   const [channels, setChannels] = useState<channelType[]>([]);
 
@@ -18,11 +18,10 @@ export const useFetchChannels = (): [
       const response = await fetch(
         "http://localhost:3000/channels/?" +
           new URLSearchParams({
-            userId: loggedUser.id,
+            userId: (loggedUser as personType).id,
           })
       );
       const data = await response.json();
-      console.log(data);
       setChannels(data.channels);
     }, 1000);
     return () => {
@@ -31,7 +30,7 @@ export const useFetchChannels = (): [
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const addChannel = (newChannel: channelType) => {
+  const addChannel = async (newChannel: channelType)  => {
     const body = {
       channel: newChannel,
     };
@@ -40,9 +39,10 @@ export const useFetchChannels = (): [
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     };
-    fetch("http://localhost:3000/newChannel", requestOptions)
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+
+    let response = await fetch("http://localhost:3000/newChannel", requestOptions);
+    let data = await response.json();
+    return data.channel;
   };
 
   const addMember = (channel: channelType, member: personType) => {

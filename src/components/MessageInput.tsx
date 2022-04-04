@@ -1,7 +1,7 @@
 import React, { useState, useRef, KeyboardEvent } from "react";
 import { sendIcon } from "../data";
 import "../styles/_messageInput.css";
-import { MessageInputPropsType, messageType } from "../types";
+import { MessageInputPropsType, messageType, personType } from "../types";
 import { useUser } from "../UserProvider";
 
 const MessageInput = (props: MessageInputPropsType) => {
@@ -9,15 +9,18 @@ const MessageInput = (props: MessageInputPropsType) => {
   const [text, setText] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null!);
 
-  console.log("Rendered Message Input ");
 
   const sendMessage = () => {
-    const randomId = (Math.random() + 1).toString(36).substring(7);
+    if(text === "") {
+      alert("enter text");
+      return;
+    }
     const message: messageType = {
-      id: randomId,
+      id: "",
       content: text,
-      sender: loggedInUser,
+      sender: loggedInUser as personType,
     };
+    setText("");
     props.addMessage(message);
     inputRef.current.value = "";
   };

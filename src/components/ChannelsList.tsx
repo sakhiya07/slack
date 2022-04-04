@@ -3,11 +3,10 @@ import "../styles/_channels.css";
 import NewChannelPopUp from "./NewChannelPopUp";
 import Channel from "./Channel";
 import { useState } from "react";
-import { channelType, ChannelsListPropslType } from "../types";
+import { channelType, ChannelsListPropslType, personType } from "../types";
 import { useUser } from "../UserProvider";
 
 const ChannelsList = (props: ChannelsListPropslType) => {
-  console.log("rendered channels");
 
   const [isPopUpOpen, setIsPopUpOpen] = useState<boolean>(false);
 
@@ -42,8 +41,8 @@ const ChannelsList = (props: ChannelsListPropslType) => {
     props.setCurrentChat({
       chatType: "direct Message",
       chatData: {
-        id: loggedUser.id,
-        receiver: loggedUser,
+        id: (loggedUser as personType).id,
+        receiver: loggedUser as personType,
       },
     });
   };

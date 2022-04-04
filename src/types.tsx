@@ -34,8 +34,8 @@ export type LoginPropsType = {
   loginUser: (user: personType) => void;
 };
 
-export type UserContextProviderType = {
-  value: [personType, React.Dispatch<React.SetStateAction<personType>>];
+export type UserProviderType = {
+  value: [personType | undefined, React.Dispatch<React.SetStateAction<personType | undefined>>];
   children: React.ReactNode;
 };
 

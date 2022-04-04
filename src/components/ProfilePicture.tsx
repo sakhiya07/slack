@@ -14,7 +14,6 @@ const getStyle = (size: number) => {
 };
 
 const ProfilePicture = (props: ProfilePictureTypes) => {
-  console.log("rendered profile picture");
 
   const IMG_STYLE = getStyle(props.size);
   return (

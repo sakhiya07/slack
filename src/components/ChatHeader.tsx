@@ -8,7 +8,6 @@ import { channelType, ChatHeaderType, directMessageType } from "../types";
 import { getPersonName } from "../utils";
 
 const ChatHeader = (props: ChatHeaderType) => {
-  console.log("Rendered ChatHeader!!!");
 
   const [isOpenMemberList, setIsOpenMemberList] = useState<boolean>(false);
   const chatType = props.currentChat.chatType;

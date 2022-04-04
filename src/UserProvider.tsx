@@ -1,11 +1,11 @@
 import React, { createContext, useContext } from "react";
-import { personType, UserContextProviderType } from "./types";
+import { personType, UserProviderType } from "./types";
 
 const userContext = createContext<
-  [personType, React.Dispatch<React.SetStateAction<personType>>] | null
+  [personType | undefined, React.Dispatch<React.SetStateAction<personType | undefined>>] | null
 >(null);
 
-const UserProvider = (props: UserContextProviderType) => {
+const UserProvider = (props: UserProviderType) => {
   console.log("rerendered UserProvider");
 
   return <userContext.Provider {...props} />;

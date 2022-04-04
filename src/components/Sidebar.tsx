@@ -5,7 +5,6 @@ import { sidebarPropsType } from "../types";
 import ChannelsList from "./ChannelsList";
 
 const Sidebar = (props: sidebarPropsType) => {
-  console.log("Rendered sidebar");
 
   return (
     <div className="sidebar">

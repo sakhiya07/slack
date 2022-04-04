@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../styles/_messages.css";
 import MessageInput from "./MessageInput";
 
@@ -8,9 +8,9 @@ import { MessagesPropsType } from "../types";
 import { getName } from "../utils";
 
 const Messages = (props: MessagesPropsType) => {
-  console.log("Rendered messages list");
 
   const [messages, addMessage] = useFetchMessage(props.currentChat.chatData.id);
+  const [isVisibleScrollDown, setIsVisibleScrollDown] = useState<boolean>(false);
 
   let name = getName(props.currentChat);
 
@@ -21,15 +21,22 @@ const Messages = (props: MessagesPropsType) => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleScroll = () => {
+    setIsVisibleScrollDown(messagesRef.current.scrollTop < 0);
+  }
+
   return (
     <>
-      <div className="messages" ref={messagesRef}>
+      <div className="messages" ref={messagesRef} onScroll={handleScroll}>
+        
         <div ref={messagesEndRef}></div>
-        {messagesRef.current && messagesRef.current.scrollTop < 0 ? (
+
+        {isVisibleScrollDown ? (
           <div className="scroll-bottom" onClick={scrollToBottom}>
             Scroll To Bottom
           </div>
         ) : null}
+
         {messages.map((message) => (
           <div className="message" key={message.id}>
             <div className="message-sender-image">
@@ -43,9 +50,11 @@ const Messages = (props: MessagesPropsType) => {
             </div>
           </div>
         ))}
+
         {messages.length === 0 ? (
           <div> Start conversation with {name}!!! </div>
         ) : null}
+
       </div>
       <MessageInput addMessage={addMessage} />
     </>

@@ -11,16 +11,15 @@ const portal = document.querySelector("#portal") as HTMLElement;
 const ProfileMenu = (props: ProfileMenuPropsType) => {
   const [loggedInUser, setLoggedInUser] = useUser();
 
-  console.log("rendered profilemenu portal");
 
-  const perosnName = getPersonName(loggedInUser);
+  const perosnName = getPersonName(loggedInUser as personType);
 
   return createPortal(
     <>
       <div className="overlayed-container" onClick={props.onClose}></div>
       <div className="profile-menu-modal">
         <div className="profile-menu-detail">
-          <ProfilePicture size={32} src={loggedInUser.imgUrl} />
+          <ProfilePicture size={32} src={(loggedInUser as personType).imgUrl} />
           <div className="profile-menu-detail-name">{perosnName}</div>
         </div>
         <div

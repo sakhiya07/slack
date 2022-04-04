@@ -3,7 +3,6 @@ import { ChannelPropsType } from "../types";
 import {} from "../utils";
 
 const Channel = (props: ChannelPropsType) => {
-  console.log("Rendered Channel");
 
   return (
     <li

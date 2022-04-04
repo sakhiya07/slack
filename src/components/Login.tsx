@@ -9,34 +9,25 @@ const Login = (props: LoginPropsType) => {
   const [lastName, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const randomId = (Math.random() + 1).toString(36).substring(7);
-
-    const user = {
+    const userInfo = {
       firstName,
       lastName,
       password,
       userName,
       imgUrl: src,
-      id: randomId,
     };
-
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userInfo),
     };
-
-    console.log(user);
-
     const response = await fetch("http://localhost:3000/login", requestOptions);
     const data = await response.json();
-    console.log(data);
-    if (response.status === 200) props.loginUser(user);
-    else {
-      console.log("not successfully logined!!!");
-    }
+    const user = data.user;
+    props.loginUser(user);   
   };
 
   return (

@@ -4,7 +4,6 @@ import { getPersonName } from "../utils";
 import ProfilePicture from "./ProfilePicture";
 
 const Channel = (props: DirectMessagePropsType) => {
-  console.log("Rendered Direct Message");
 
   return (
     <li

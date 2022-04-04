@@ -5,20 +5,20 @@ import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 
 import { useFetchDirectMessages } from "../hooks/useFetchDirectMessages";
+import { useFetchChannels } from "../hooks/useFetchChannels";
 
-import { useState } from "react";
+import { useState , useCallback} from "react";
 
 import { useUser } from "../UserProvider";
 
-import { channelType, chatType, directMessageType } from "../types";
-import { useFetchChannels } from "../hooks/useFetchChannels";
+import { channelType, chatType, directMessageType, personType } from "../types";
 
 const Slack = () => {
   const [loggedInUser] = useUser();
 
   const chatSelfData: directMessageType = {
-    id: loggedInUser.id,
-    receiver: loggedInUser,
+    id: (loggedInUser as personType).id,
+    receiver: loggedInUser as personType,
   };
 
   const [currentChat, setCurrentChat] = useState<chatType>({
@@ -31,23 +31,25 @@ const Slack = () => {
 
   const [directMessages, addDirectMessage] = useFetchDirectMessages();
 
-  console.log("Rendered Slack App");
 
-  const handleAddChannel = (newChannel: channelType) => {
-    addChannel(newChannel);
+  const handleAddChannel = useCallback(async (newChannel: channelType) => {
+    const addedChannel = await addChannel(newChannel);
+    console.log(addedChannel);
     setCurrentChat({
       chatType: "channel",
-      chatData: newChannel,
+      chatData: addedChannel,
     });
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[channels])
 
-  const handleAddDirectMessage = (newDirectMessage: directMessageType) => {
-    addDirectMessage(newDirectMessage);
+  const handleAddDirectMessage = useCallback(async (newDirectMessage: directMessageType) => {
+    const addedDirectMessage = await addDirectMessage(newDirectMessage);
     setCurrentChat({
       chatType: "direct Message",
-      chatData: newDirectMessage as directMessageType,
+      chatData: addedDirectMessage as directMessageType,
     });
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[directMessages])
 
   return (
     <>
