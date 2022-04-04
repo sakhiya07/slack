@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import "../styles/_newChannelPopUp.css";
 import { useState } from "react";
 
-import { channelType, personType } from "../types";
+import { ChannelType, PersonType } from "../types";
 import { useUser } from "../UserProvider";
 
 import { NewChannelPopUpPropsType } from "../types";
@@ -17,13 +17,13 @@ const NewChannelPopUp = (props: NewChannelPopUpPropsType) => {
 
   const createChannel = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newChannel: channelType = {
+    const newChannel: ChannelType = {
       id: "",
       name: channelName,
       description: description,
       imgUrl: "#",
-      creator: loggedUser as personType,
-      members: [loggedUser as personType],
+      creator: loggedUser as PersonType,
+      members: [loggedUser as PersonType],
     };
 
     props.addChannel(newChannel);

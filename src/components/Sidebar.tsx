@@ -1,10 +1,10 @@
 import React from "react";
 import "../styles/_sidebar.css";
 import DirectMessagesList from "./DirectMessagesList";
-import { sidebarPropsType } from "../types";
+import { SidebarPropsType } from "../types";
 import ChannelsList from "./ChannelsList";
 
-const Sidebar = (props: sidebarPropsType) => {
+const Sidebar = (props: SidebarPropsType) => {
 
   return (
     <div className="sidebar">

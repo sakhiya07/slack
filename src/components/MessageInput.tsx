@@ -1,7 +1,7 @@
 import React, { useState, useRef, KeyboardEvent } from "react";
 import { sendIcon } from "../data";
 import "../styles/_messageInput.css";
-import { MessageInputPropsType, messageType, personType } from "../types";
+import { MessageInputPropsType, MessageType, PersonType } from "../types";
 import { useUser } from "../UserProvider";
 
 const MessageInput = (props: MessageInputPropsType) => {
@@ -15,10 +15,10 @@ const MessageInput = (props: MessageInputPropsType) => {
       alert("enter text");
       return;
     }
-    const message: messageType = {
+    const message: MessageType = {
       id: "",
       content: text,
-      sender: loggedInUser as personType,
+      sender: loggedInUser as PersonType,
     };
     setText("");
     props.addMessage(message);

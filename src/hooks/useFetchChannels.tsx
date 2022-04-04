@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../UserProvider";
-import { channelType, personType } from "../types";
+import { ChannelType, PersonType } from "../types";
 
 export const useFetchChannels = (): [
-  channelType[],
-  (newChannel: channelType) => Promise<any>,
-  (channel: channelType, member: personType) => void,
-  (channel: channelType, member: personType) => void,
-  (channel: channelType) => void
+  ChannelType[],
+  (newChannel: ChannelType) => Promise<any>,
+  (channel: ChannelType, member: PersonType) => void,
+  (channel: ChannelType, member: PersonType) => void,
+  (channel: ChannelType) => void
 ] => {
   let [loggedUser] = useUser();
 
-  const [channels, setChannels] = useState<channelType[]>([]);
+  const [channels, setChannels] = useState<ChannelType[]>([]);
 
   useEffect(() => {
     const setIntervalId = setInterval(async () => {
       const response = await fetch(
         "http://localhost:3000/channels/?" +
           new URLSearchParams({
-            userId: (loggedUser as personType).id,
+            userId: (loggedUser as PersonType).id,
           })
       );
       const data = await response.json();
@@ -30,7 +30,7 @@ export const useFetchChannels = (): [
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const addChannel = async (newChannel: channelType)  => {
+  const addChannel = async (newChannel: ChannelType)  => {
     const body = {
       channel: newChannel,
     };
@@ -45,7 +45,7 @@ export const useFetchChannels = (): [
     return data.channel;
   };
 
-  const addMember = (channel: channelType, member: personType) => {
+  const addMember = (channel: ChannelType, member: PersonType) => {
     const body = {
       channel,
       member,
@@ -60,7 +60,7 @@ export const useFetchChannels = (): [
       .then((data) => console.log(data));
   };
 
-  const removeMember = (channel: channelType, member: personType) => {
+  const removeMember = (channel: ChannelType, member: PersonType) => {
     const body = {
       channel,
       member,
@@ -75,7 +75,7 @@ export const useFetchChannels = (): [
       .then((data) => console.log(data));
   };
 
-  const removeChannel = (channel: channelType) => {
+  const removeChannel = (channel: ChannelType) => {
     const body = {
       channel,
     };

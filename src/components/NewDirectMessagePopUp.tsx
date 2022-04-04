@@ -3,9 +3,9 @@ import { createPortal } from "react-dom";
 import "../styles/_newChatPopUp.css";
 
 import {
-  directMessageType,
+  DirectMessageType,
   NewDirectMesssagePopUpPropsType,
-  personType,
+  PersonType,
 } from "../types";
 
 import { getPersonName } from "../utils";
@@ -15,7 +15,7 @@ const portal = document.querySelector("#portal") as HTMLElement;
 const NewDirectMessagePopUp = (props: NewDirectMesssagePopUpPropsType) => {
   const [name, setName] = useState<string>("");
 
-  let registeredUsers = useRef<personType[]>(null!);
+  let registeredUsers = useRef<PersonType[]>(null!);
 
   useEffect(() => {
     fetch("http://localhost:3000/users")
@@ -24,7 +24,7 @@ const NewDirectMessagePopUp = (props: NewDirectMesssagePopUpPropsType) => {
       })
       .then(
         (data) =>
-          (registeredUsers.current = data.registredUsers as personType[])
+          (registeredUsers.current = data.registredUsers as PersonType[])
       );
   }, []);
 
@@ -39,10 +39,9 @@ const NewDirectMessagePopUp = (props: NewDirectMesssagePopUpPropsType) => {
       alert("Enter Registered User");
       return;
     }
-    const randomId = (Math.random() + 1).toString(36).substring(7);
 
-    const newDirectMessage: directMessageType = {
-      id: randomId,
+    const newDirectMessage: DirectMessageType = {
+      id: "",
       receiver: receiver,
     };
 

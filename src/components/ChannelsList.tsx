@@ -3,7 +3,7 @@ import "../styles/_channels.css";
 import NewChannelPopUp from "./NewChannelPopUp";
 import Channel from "./Channel";
 import { useState } from "react";
-import { channelType, ChannelsListPropslType, personType } from "../types";
+import { ChannelType, ChannelsListPropslType, PersonType } from "../types";
 import { useUser } from "../UserProvider";
 
 const ChannelsList = (props: ChannelsListPropslType) => {
@@ -24,8 +24,8 @@ const ChannelsList = (props: ChannelsListPropslType) => {
       throw new Error("not exist channel selected how it is possible ");
     }
     props.setCurrentChat({
-      chatType: "channel",
-      chatData: channel as channelType,
+      chatType: "Channel",
+      chatData: channel as ChannelType,
     });
   };
 
@@ -36,13 +36,13 @@ const ChannelsList = (props: ChannelsListPropslType) => {
 
     let channel = props.channels.find((channel) => channel.id === id);
 
-    props.deleteChannel(channel as channelType);
+    props.deleteChannel(channel as ChannelType);
 
     props.setCurrentChat({
-      chatType: "direct Message",
+      chatType: "DirectMessage",
       chatData: {
-        id: (loggedUser as personType).id,
-        receiver: loggedUser as personType,
+        id: (loggedUser as PersonType).id,
+        receiver: loggedUser as PersonType,
       },
     });
   };

@@ -4,7 +4,7 @@ import "../styles/_header.css";
 import ProfileMenu from "./ProfileMenu";
 import { useState } from "react";
 import { useUser } from "../UserProvider";
-import { personType } from "../types";
+import { PersonType } from "../types";
 
 const Header = () => {
   const [isOpenProfileMenu, setIsOpenProfileMenu] = useState<boolean>(false);
@@ -20,7 +20,7 @@ const Header = () => {
         className="profile-picture-header"
         onClick={() => setIsOpenProfileMenu(true)}
       >
-        <ProfilePicture size={30} src={(loggedInUser as personType).imgUrl} />
+        <ProfilePicture size={30} src={(loggedInUser as PersonType).imgUrl} />
       </div>
     </div>
   );

@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../UserProvider";
-import { directMessageType, personType } from "../types";
+import { DirectMessageType, PersonType } from "../types";
 
 export const useFetchDirectMessages = (): [
-  directMessageType[],
-  (newDirectMessage: directMessageType) => Promise<any>
+  DirectMessageType[],
+  (newDirectMessage: DirectMessageType) => Promise<any>
 ] => {
   const [loggedUser] = useUser();
-  const [directMessages, setDirectMessages] = useState<directMessageType[]>([]);
+  const [directMessages, setDirectMessages] = useState<DirectMessageType[]>([]);
 
   useEffect(() => {
     const setIntervalId = setInterval(async () => {
       const response = await fetch(
         "http://localhost:3000/directMessages/?" +
           new URLSearchParams({
-            userId: (loggedUser as personType).id,
+            userId: (loggedUser as PersonType).id,
           })
       );
       const data = await response.json();
@@ -27,7 +27,7 @@ export const useFetchDirectMessages = (): [
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const addDirectMessage = async (newDirectMessage: directMessageType) => {
+  const addDirectMessage = async (newDirectMessage: DirectMessageType) => {
     let alreadyExistDirectMessage = directMessages.find(
       (existingDirectMessage) =>
         existingDirectMessage.receiver.id === newDirectMessage.receiver.id

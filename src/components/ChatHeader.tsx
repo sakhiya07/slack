@@ -4,7 +4,7 @@ import "../styles/_chatHeader.css";
 import { useState } from "react";
 import ChannelMembers from "./ChannelMembers";
 import { groupLogo } from "../data";
-import { channelType, ChatHeaderType, directMessageType } from "../types";
+import { ChannelType, ChatHeaderType, DirectMessageType } from "../types";
 import { getPersonName } from "../utils";
 
 const ChatHeader = (props: ChatHeaderType) => {
@@ -13,8 +13,8 @@ const ChatHeader = (props: ChatHeaderType) => {
   const chatType = props.currentChat.chatType;
   const chatData = props.currentChat.chatData;
 
-  if (chatType === "channel") {
-    const { name } = chatData as channelType;
+  if (chatType === "Channel") {
+    const { name } = chatData as ChannelType;
     return (
       <div className="chat-info">
         <div className="chat-logo">#</div>
@@ -30,7 +30,7 @@ const ChatHeader = (props: ChatHeaderType) => {
         {isOpenMemberList ? (
           <ChannelMembers
             onClose={() => setIsOpenMemberList(false)}
-            chatData={chatData as channelType}
+            chatData={chatData as ChannelType}
             addMember={props.addMember}
             removeMember={props.removeMember}
             setCurrentChat={props.setCurrentChat}
@@ -39,7 +39,7 @@ const ChatHeader = (props: ChatHeaderType) => {
       </div>
     );
   } else {
-    const { receiver } = chatData as directMessageType;
+    const { receiver } = chatData as DirectMessageType;
     return (
       <div className="chat-info">
         <ProfilePicture size={24} src={receiver.imgUrl} />

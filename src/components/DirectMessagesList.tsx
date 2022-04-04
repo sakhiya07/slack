@@ -4,7 +4,7 @@ import { useState } from "react";
 import NewDirectMessagePopUp from "./NewDirectMessagePopUp";
 import DirectMessage from "./DirectMessage";
 
-import { DirectMessagesListPropsType, directMessageType } from "../types";
+import { DirectMessagesListPropsType, DirectMessageType } from "../types";
 
 // import { checkDirectMessagesListProps } from "../utils";
 
@@ -22,8 +22,8 @@ const DirectMessagesList = (props: DirectMessagesListPropsType) => {
       (directMessage) => directMessage.id === id
     );
     props.setCurrentChat({
-      chatType: "direct Message",
-      chatData: directMessage as directMessageType,
+      chatType: "DirectMessage",
+      chatData: directMessage as DirectMessageType,
     });
   };
 

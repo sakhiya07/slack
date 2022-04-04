@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { messageType } from "../types";
+import { MessageType } from "../types";
 
 export const useFetchMessage = (
   chatId: string
-): [messageType[], (message: messageType) => void] => {
-  const [messages, setMessages] = useState<messageType[]>([]);
+): [MessageType[], (message: MessageType) => void] => {
+  const [messages, setMessages] = useState<MessageType[]>([]);
   useEffect(() => {
     const setIntervalId = setInterval(async () => {
       const response = await fetch(
@@ -22,7 +22,7 @@ export const useFetchMessage = (
     };
   }, [chatId]);
 
-  const addMessage = (message: messageType) => {
+  const addMessage = (message: MessageType) => {
     const body = {
       chatId,
       message,

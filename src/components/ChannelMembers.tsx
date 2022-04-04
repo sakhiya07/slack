@@ -2,12 +2,12 @@ import React, { KeyboardEvent, useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "../styles/_channelMembers.css";
 
-import { ChannelMembersPropsType, channelType, personType } from "../types";
+import { ChannelMembersPropsType, ChannelType, PersonType } from "../types";
 
 const portal = document.querySelector("#portal") as HTMLElement;
 
 const ChannelMembers = (props: ChannelMembersPropsType) => {
-  let registeredUsers = useRef<personType[]>(null!);
+  let registeredUsers = useRef<PersonType[]>(null!);
 
   useEffect(() => {
     fetch("http://localhost:3000/users")
@@ -16,7 +16,7 @@ const ChannelMembers = (props: ChannelMembersPropsType) => {
       })
       .then(
         (data) =>
-          (registeredUsers.current = data.registredUsers as personType[])
+          (registeredUsers.current = data.registredUsers as PersonType[])
       );
   }, []);
 
@@ -25,7 +25,7 @@ const ChannelMembers = (props: ChannelMembersPropsType) => {
   const inputRef = useRef<HTMLInputElement>(null!);
 
   const handleRemoveMember = (event: React.MouseEvent<HTMLDivElement>) => {
-    let newMembers: personType[] = [];
+    let newMembers: PersonType[] = [];
     if (event.currentTarget.id === props.chatData.creator.id) {
       alert("You can't remove Creator of Group!!!");
       return;
@@ -38,9 +38,9 @@ const ChannelMembers = (props: ChannelMembersPropsType) => {
     let removedMember = props.chatData.members.find((member) => {
       return member.id === event.currentTarget.id;
     });
-    const newChatData: channelType = { ...props.chatData, members: newMembers };
-    props.removeMember(newChatData, removedMember as personType);
-    props.setCurrentChat({ chatType: "channel", chatData: newChatData });
+    const newChatData: ChannelType = { ...props.chatData, members: newMembers };
+    props.removeMember(newChatData, removedMember as PersonType);
+    props.setCurrentChat({ chatType: "Channel", chatData: newChatData });
   };
 
   const handleAddMember = (event: KeyboardEvent) => {
@@ -64,10 +64,10 @@ const ChannelMembers = (props: ChannelMembersPropsType) => {
       return;
     }
 
-    let newMembers: personType[] = [...props.chatData.members, newMember];
-    const newChatData: channelType = { ...props.chatData, members: newMembers };
+    let newMembers: PersonType[] = [...props.chatData.members, newMember];
+    const newChatData: ChannelType = { ...props.chatData, members: newMembers };
     props.addMember(newChatData, newMember);
-    props.setCurrentChat({ chatType: "channel", chatData: newChatData });
+    props.setCurrentChat({ chatType: "Channel", chatData: newChatData });
     inputRef.current.value = "";
   };
 

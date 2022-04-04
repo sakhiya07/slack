@@ -1,24 +1,24 @@
-export type messageType = {
+export type MessageType = {
   id: string;
-  sender: personType;
+  sender: PersonType;
   content: string;
 };
 
-export type channelType = {
+export type ChannelType = {
   id: string;
   name: string;
   description: string;
   imgUrl: string;
-  creator: personType;
-  members: personType[];
+  creator: PersonType;
+  members: PersonType[];
 };
 
-export type directMessageType = {
+export type DirectMessageType = {
   id: string;
-  receiver: personType;
+  receiver: PersonType;
 };
 
-export type personType = {
+export type PersonType = {
   id: string;
   firstName: string;
   lastName: string;
@@ -31,86 +31,86 @@ export type ProfileMenuPropsType = {
 };
 
 export type LoginPropsType = {
-  loginUser: (user: personType) => void;
+  loginUser: (user: PersonType) => void;
 };
 
 export type UserProviderType = {
-  value: [personType | undefined, React.Dispatch<React.SetStateAction<personType | undefined>>];
+  value: [PersonType | undefined, React.Dispatch<React.SetStateAction<PersonType | undefined>>];
   children: React.ReactNode;
 };
 
-export type chatType = {
-  chatType: "direct Message" | "channel";
-  chatData: directMessageType | channelType;
+export type ChatType = {
+  chatType: "DirectMessage" | "Channel";
+  chatData: DirectMessageType | ChannelType;
 };
 
 export type ChatHeaderType = {
-  currentChat: chatType;
-  addMember: (channel: channelType, member: personType) => void;
-  removeMember: (channel: channelType, member: personType) => void;
-  setCurrentChat: React.Dispatch<React.SetStateAction<chatType>>;
+  currentChat: ChatType;
+  addMember: (channel: ChannelType, member: PersonType) => void;
+  removeMember: (channel: ChannelType, member: PersonType) => void;
+  setCurrentChat: React.Dispatch<React.SetStateAction<ChatType>>;
 };
 
-export type sidebarPropsType = {
-  addChannel: (channel: channelType) => void;
-  channels: channelType[];
-  directMessages: directMessageType[];
-  addDirectMessage: (directMessage: directMessageType) => void;
-  currentChat: chatType;
-  setCurrentChat: React.Dispatch<React.SetStateAction<chatType>>;
-  deleteChannel: (channel: channelType) => void;
+export type SidebarPropsType = {
+  addChannel: (channel: ChannelType) => void;
+  channels: ChannelType[];
+  directMessages: DirectMessageType[];
+  addDirectMessage: (directMessage: DirectMessageType) => void;
+  currentChat: ChatType;
+  setCurrentChat: React.Dispatch<React.SetStateAction<ChatType>>;
+  deleteChannel: (channel: ChannelType) => void;
 };
 
 export type ChannelsListPropslType = {
-  channels: channelType[];
-  addChannel: (channel: channelType) => void;
-  currentChat: chatType;
-  setCurrentChat: React.Dispatch<React.SetStateAction<chatType>>;
-  deleteChannel: (channel: channelType) => void;
+  channels: ChannelType[];
+  addChannel: (channel: ChannelType) => void;
+  currentChat: ChatType;
+  setCurrentChat: React.Dispatch<React.SetStateAction<ChatType>>;
+  deleteChannel: (channel: ChannelType) => void;
 };
 
 export type DirectMessagesListPropsType = {
-  directMessages: directMessageType[];
-  addDirectMessage: (directMessage: directMessageType) => void;
-  currentChat: chatType;
-  setCurrentChat: React.Dispatch<React.SetStateAction<chatType>>;
+  directMessages: DirectMessageType[];
+  addDirectMessage: (directMessage: DirectMessageType) => void;
+  currentChat: ChatType;
+  setCurrentChat: React.Dispatch<React.SetStateAction<ChatType>>;
 };
 
 export type ChannelMembersPropsType = {
   onClose: () => void;
-  chatData: channelType;
-  addMember: (channel: channelType, member: personType) => void;
-  removeMember: (channel: channelType, member: personType) => void;
-  setCurrentChat: React.Dispatch<React.SetStateAction<chatType>>;
+  chatData: ChannelType;
+  addMember: (channel: ChannelType, member: PersonType) => void;
+  removeMember: (channel: ChannelType, member: PersonType) => void;
+  setCurrentChat: React.Dispatch<React.SetStateAction<ChatType>>;
 };
 
 export type NewChannelPopUpPropsType = {
   onClose: () => void;
-  addChannel: (channel: channelType) => void;
+  addChannel: (channel: ChannelType) => void;
 };
 
 export type NewDirectMesssagePopUpPropsType = {
   onClose: () => void;
-  addDirectMessage: (channel: directMessageType) => void;
+  addDirectMessage: (channel: DirectMessageType) => void;
 };
 
 export type MessagesPropsType = {
-  currentChat: chatType;
+  currentChat: ChatType;
 };
 
 export type MessageInputPropsType = {
-  addMessage: (message: messageType) => void;
+  addMessage: (message: MessageType) => void;
 };
 
 export type ChannelPropsType = {
-  channel: channelType;
+  channel: ChannelType;
   selected: boolean;
   handleClick: (event: React.MouseEvent<HTMLLIElement>) => void;
   handleDeleteChannel: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export type DirectMessagePropsType = {
-  directMessage: directMessageType;
+  directMessage: DirectMessageType;
   selected: boolean;
   handleClick: (event: React.MouseEvent<HTMLLIElement>) => void;
 };

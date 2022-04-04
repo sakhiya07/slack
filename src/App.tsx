@@ -5,20 +5,20 @@ import Slack from "./components/Slack";
 
 import { useMemo, useState, useCallback } from "react";
 
-import { personType } from "./types";
+import { PersonType } from "./types";
 
 import UserProvider from "./UserProvider";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState<personType| undefined>();
+  const [loggedInUser, setLoggedInUser] = useState<PersonType| undefined>();
 
-  const loginUser = useCallback((user: personType) => {
+  const loginUser = useCallback((user: PersonType) => {
     setLoggedInUser(user);
   }, [])
 
   const userProviderValue: [
-    personType | undefined,
-    React.Dispatch<React.SetStateAction<personType | undefined>>
+    PersonType | undefined,
+    React.Dispatch<React.SetStateAction<PersonType | undefined>>
   ] = useMemo(() => [loggedInUser, setLoggedInUser], [loggedInUser]);
 
   return (

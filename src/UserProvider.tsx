@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
-import { personType, UserProviderType } from "./types";
+import { PersonType, UserProviderType } from "./types";
 
 const userContext = createContext<
-  [personType | undefined, React.Dispatch<React.SetStateAction<personType | undefined>>] | null
+  [PersonType | undefined, React.Dispatch<React.SetStateAction<PersonType | undefined>>] | null
 >(null);
 
 const UserProvider = (props: UserProviderType) => {

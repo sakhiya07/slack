@@ -11,18 +11,18 @@ import { useState , useCallback} from "react";
 
 import { useUser } from "../UserProvider";
 
-import { channelType, chatType, directMessageType, personType } from "../types";
+import { ChannelType, ChatType, DirectMessageType, PersonType } from "../types";
 
 const Slack = () => {
   const [loggedInUser] = useUser();
 
-  const chatSelfData: directMessageType = {
-    id: (loggedInUser as personType).id,
-    receiver: loggedInUser as personType,
+  const chatSelfData: DirectMessageType = {
+    id: (loggedInUser as PersonType).id,
+    receiver: loggedInUser as PersonType,
   };
 
-  const [currentChat, setCurrentChat] = useState<chatType>({
-    chatType: "direct Message",
+  const [currentChat, setCurrentChat] = useState<ChatType>({
+    chatType: "DirectMessage",
     chatData: chatSelfData,
   });
 
@@ -32,21 +32,21 @@ const Slack = () => {
   const [directMessages, addDirectMessage] = useFetchDirectMessages();
 
 
-  const handleAddChannel = useCallback(async (newChannel: channelType) => {
+  const handleAddChannel = useCallback(async (newChannel: ChannelType) => {
     const addedChannel = await addChannel(newChannel);
     console.log(addedChannel);
     setCurrentChat({
-      chatType: "channel",
+      chatType: "Channel",
       chatData: addedChannel,
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[channels])
 
-  const handleAddDirectMessage = useCallback(async (newDirectMessage: directMessageType) => {
+  const handleAddDirectMessage = useCallback(async (newDirectMessage: DirectMessageType) => {
     const addedDirectMessage = await addDirectMessage(newDirectMessage);
     setCurrentChat({
-      chatType: "direct Message",
-      chatData: addedDirectMessage as directMessageType,
+      chatType: "DirectMessage",
+      chatData: addedDirectMessage as DirectMessageType,
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[directMessages])
