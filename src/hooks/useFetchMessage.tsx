@@ -23,9 +23,13 @@ const postMessage = async (chatId: string, message: MessageType) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
-  const response = await fetch("http://localhost:3000/addMessage", requestOptions);
-  const data = await response.json();
-  console.log(data.message);
+  try {
+    const response = await fetch("http://localhost:3000/addMessage", requestOptions);
+    const data = await response.json();
+    console.log(data.message);
+  } catch (error) {
+    throw error;
+  }
 }
 
 export const useFetchMessage = (chatId: string): [MessageType[], (message: MessageType) => void] => {
@@ -37,9 +41,14 @@ export const useFetchMessage = (chatId: string): [MessageType[], (message: Messa
     setMessages(response);
   }, 1000)
 
-  const addMessage = (message: MessageType) => {
+  const addMessage = async (message: MessageType) => {
     setMessages(messages => [message, ...messages]);
-    postMessage(chatId, message);
+    try {
+      await postMessage(chatId, message);
+    } catch(error) {
+      setMessages(messages);
+      console.log(error);
+    }
   };
 
   return [messages, addMessage];
