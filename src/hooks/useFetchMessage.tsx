@@ -32,7 +32,7 @@ export const useFetchMessage = (
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     };
-    fetch("http://localhost:3000/addmessage", requestOptions)
+    fetch("http://localhost:3000/addMessage", requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data));
   };
@@ -40,17 +40,3 @@ export const useFetchMessage = (
   return [messages, addMessage];
 };
 
-
-
-// const content = (close) => {
-//   <NewDirectMessagePopUp onClose={close}/>
-// }
-
-// <Modal content={content}>
-
-//  {({open, isOpen}) => {
-// <button onClick={open}/>
-// }}
-
-
-// </Modal>

@@ -1,28 +1,46 @@
 import React from "react";
 import ProfilePicture from "./ProfilePicture";
 import "../styles/_header.css";
-import ProfileMenu from "./ProfileMenu";
+import "../styles/_profileMenu.css";
 import { useState } from "react";
 import { useUser } from "../UserProvider";
 import { PersonType } from "../types";
+import { getPersonName } from "../utils";
+import Modal from "./Modal";
 
 const Header = () => {
+  const [loggedInUser, setLoggedInUser] = useUser();
+
+
+  const perosnName = getPersonName(loggedInUser as PersonType);
+
   const [isOpenProfileMenu, setIsOpenProfileMenu] = useState<boolean>(false);
-  const [loggedInUser] = useUser();
 
 
   return (
     <div className="header">
-      {isOpenProfileMenu ? (
-        <ProfileMenu onClose={() => setIsOpenProfileMenu(false)} />
-      ) : null}
       <div
         className="profile-picture-header"
         onClick={() => setIsOpenProfileMenu(true)}
       >
         <ProfilePicture size={30} src={(loggedInUser as PersonType).imgUrl} />
       </div>
+      <Modal isOpen={isOpenProfileMenu} onRequestClose={() => setIsOpenProfileMenu(false)}>
+        <div className="profile-menu-modal">
+          <div className="profile-menu-detail">
+            <ProfilePicture size={32} src={(loggedInUser as PersonType).imgUrl} />
+            <div className="profile-menu-detail-name">{perosnName}</div>
+          </div>
+          <div
+            className="profile-menu-signout"
+            onClick={() => setLoggedInUser(undefined)}
+          >
+            Sign Out
+          </div>
+        </div>
+      </Modal>
     </div>
+
   );
 };
 
