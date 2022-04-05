@@ -7,8 +7,9 @@ import DirectMessage from "./DirectMessage";
 import Modal from "./Modal";
 
 import { DirectMessagesListPropsType, DirectMessageType, PersonType } from "../types";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
+import { getRegisteredUsers } from "../utils";
 
 import { getPersonName } from "../utils";
 
@@ -16,21 +17,7 @@ import { getPersonName } from "../utils";
 const DirectMessagesList = (props: DirectMessagesListPropsType) => {
 
   const [name, setName] = useState<string>("");
-
-  const [registeredUsers, setRegisteredUsers] = useState<PersonType[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/users")
-      .then((response) => {
-        return response.json();
-      })
-      .then(
-        (data) =>
-          (setRegisteredUsers(data.registeredUsers))
-      );
-  }, []);
-
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
     const id = event.currentTarget.id;
@@ -46,9 +33,11 @@ const DirectMessagesList = (props: DirectMessagesListPropsType) => {
     });
   };
 
-  const createDirectMessage = (event: React.FormEvent<HTMLFormElement>) => {
+ 
+
+  const createDirectMessage = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(registeredUsers);
+    const registeredUsers: PersonType[] = await getRegisteredUsers();
     const receiver = registeredUsers.find((user) => {
       return getPersonName(user) === name;
     });
@@ -91,7 +80,7 @@ const DirectMessagesList = (props: DirectMessagesListPropsType) => {
       </ul>
     </div>
     <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
-    <div className="new-chat-modal">
+      <div className="new-chat-modal">
         <div className="new-chat-modal-titlebar">
           <h3 className="new-chat-modal-title">Add Member</h3>
           <div className="new-chat-modal-close-button" onClick={() => setIsOpen(false)}>

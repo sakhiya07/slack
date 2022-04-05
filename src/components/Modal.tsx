@@ -1,14 +1,9 @@
 import React from 'react'
 import { createPortal } from "react-dom";
 
-type ModalPropsType = {
-  isOpen: boolean
-  onRequestClose: () => void
-  children: JSX.Element
-}
+import {ModalPropsType} from '../types'
 
 const portal = document.querySelector("#portal") as HTMLElement;
-
 
 const Modal = (props: ModalPropsType) => {
   if(!props.isOpen)  return null;
@@ -21,4 +16,4 @@ const Modal = (props: ModalPropsType) => {
   );
 }
 
-export default Modal
+export default Modal;

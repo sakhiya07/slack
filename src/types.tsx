@@ -61,7 +61,7 @@ export type SidebarPropsType = {
   deleteChannel: (channel: ChannelType) => void;
 };
 
-export type ChannelsListPropslType = {
+export type ChannelsListPropsType = {
   channels: ChannelType[];
   addChannel: (channel: ChannelType) => void;
   currentChat: ChatType;
@@ -114,3 +114,10 @@ export type DirectMessagePropsType = {
   selected: boolean;
   handleClick: (event: React.MouseEvent<HTMLLIElement>) => void;
 };
+
+
+export type ModalPropsType = {
+  isOpen: boolean
+  onRequestClose: () => void
+  children: JSX.Element
+}

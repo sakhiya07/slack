@@ -12,7 +12,7 @@ const Header = () => {
   const [loggedInUser, setLoggedInUser] = useUser();
 
 
-  const perosnName = getPersonName(loggedInUser as PersonType);
+  const personName = getPersonName(loggedInUser as PersonType);
 
   const [isOpenProfileMenu, setIsOpenProfileMenu] = useState<boolean>(false);
 
@@ -29,7 +29,7 @@ const Header = () => {
         <div className="profile-menu-modal">
           <div className="profile-menu-detail">
             <ProfilePicture size={32} src={(loggedInUser as PersonType).imgUrl} />
-            <div className="profile-menu-detail-name">{perosnName}</div>
+            <div className="profile-menu-detail-name">{personName}</div>
           </div>
           <div
             className="profile-menu-signout"

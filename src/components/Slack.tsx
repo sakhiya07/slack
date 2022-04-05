@@ -34,7 +34,6 @@ const Slack = () => {
 
   const handleAddChannel = useCallback(async (newChannel: ChannelType) => {
     const addedChannel = await addChannel(newChannel);
-    console.log(addedChannel);
     setCurrentChat({
       chatType: "Channel",
       chatData: addedChannel,

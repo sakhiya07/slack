@@ -7,30 +7,18 @@ import "../styles/_chatHeader.css";
 import "../styles/_channelMembers.css";
 
 
-import { useState, useEffect, useRef, KeyboardEvent } from "react";
+import { useState, useRef, KeyboardEvent } from "react";
 
 
 import { groupLogo } from "../data";
 import { ChannelType, ChatHeaderType, DirectMessageType, PersonType } from "../types";
-import { getPersonName } from "../utils";
+import { getPersonName, getRegisteredUsers } from "../utils";
 
 const ChatHeader = (props: ChatHeaderType) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [registeredUsers, setRegisteredUsers] = useState<PersonType[]>([]); 
   const [name, setName] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null!);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/users")
-      .then((response) => {
-        return response.json();
-      })
-      .then(
-        (data) =>
-          (setRegisteredUsers(data.registeredUsers))
-      );
-  }, []);
 
   const chatType = props.currentChat.chatType;
   const chatData = props.currentChat.chatData;
@@ -49,8 +37,9 @@ const ChatHeader = (props: ChatHeaderType) => {
     props.setCurrentChat({ chatType: "Channel", chatData: newChatData });
   };
 
-  const handleAddMember = (event: KeyboardEvent) => {
+  const handleAddMember = async (event: KeyboardEvent) => {
     if (event.key !== "Enter") return;
+    const registeredUsers: PersonType[] = await getRegisteredUsers();
     const newMember = registeredUsers.find(
       (user) => user.firstName + " " + user.lastName === name
     );

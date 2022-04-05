@@ -1,13 +1,14 @@
-import React, {useCallback} from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback } from "react";
 import "../styles/_channels.css";
 import "../styles/_newChannelPopUp.css";
 import Channel from "./Channel";
 import { useState } from "react";
-import { ChannelType, ChannelsListPropslType, PersonType } from "../types";
+import { ChannelType, ChannelsListPropsType, PersonType } from "../types";
 import { useUser } from "../UserProvider";
 import Modal from "./Modal";
 
-const ChannelsList = (props: ChannelsListPropslType) => {
+const ChannelsList = (props: ChannelsListPropsType) => {
 
   const [channelName, setChannelName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -15,16 +16,16 @@ const ChannelsList = (props: ChannelsListPropslType) => {
 
   const [loggedUser] = useUser();
 
-  const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
+  const handleClick = useCallback((event: React.MouseEvent<HTMLLIElement>) => {
     const id = event.currentTarget.id;
     let channel = props.channels.find((channel) => channel.id === id);
     props.setCurrentChat({
       chatType: "Channel",
       chatData: channel as ChannelType,
     });
-  };
+  },[props.currentChat]);
 
-  const handleDeleteChannel = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleDeleteChannel = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     const id = event.currentTarget.id;
     let channel = props.channels.find((channel) => channel.id === id);
@@ -36,7 +37,7 @@ const ChannelsList = (props: ChannelsListPropslType) => {
         receiver: loggedUser as PersonType,
       },
     });
-  };;
+  }, [props.channels]);
 
   const createChannel = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
