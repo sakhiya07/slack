@@ -1,4 +1,5 @@
 .header {
+  min-height: 38px;
   display: flex;
   justify-content: end;
   background-color: rgb(53, 13, 54);

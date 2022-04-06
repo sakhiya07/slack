@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { createPortal } from "react-dom";
 
-import {ModalPropsType} from '../types'
+import { ModalPropsType } from '../types';
 
 const portal = document.querySelector("#portal") as HTMLElement;
 
-const Modal = (props: ModalPropsType) => {
-  if(!props.isOpen)  return null;
+
+const Modal = (props : ModalPropsType) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const open = () => setIsOpen(true);
+
+  const close = () => setIsOpen(false);
+  
+  if(!isOpen)   return (props.children(open));
   return createPortal(
     <>
-      <div className="overlayed-container" onClick={props.onRequestClose}></div>
-      {props.children}
+      <div className="overlayed-container" onClick={() => setIsOpen(false)}></div>
+      {props.content(close)}
     </>,
     portal
   );
 }
 
-export default Modal;
+export default Modal
+
+
+
+
+

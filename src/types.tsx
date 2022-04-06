@@ -27,7 +27,7 @@ export type PersonType = {
 };
 
 export type ProfileMenuPropsType = {
-  onClose: () => void;
+  close: () => void;
 };
 
 export type LoginPropsType = {
@@ -77,7 +77,7 @@ export type DirectMessagesListPropsType = {
 };
 
 export type ChannelMembersPropsType = {
-  onClose: () => void;
+  close: () => void;
   chatData: ChannelType;
   addMember: (channel: ChannelType, member: PersonType) => void;
   removeMember: (channel: ChannelType, member: PersonType) => void;
@@ -85,12 +85,12 @@ export type ChannelMembersPropsType = {
 };
 
 export type NewChannelPopUpPropsType = {
-  onClose: () => void;
+  close: () => void;
   addChannel: (channel: ChannelType) => void;
 };
 
-export type NewDirectMesssagePopUpPropsType = {
-  onClose: () => void;
+export type NewDirectMessagePopUpPropsType = {
+  close: () => void;
   addDirectMessage: (channel: DirectMessageType) => void;
 };
 
@@ -116,8 +116,8 @@ export type DirectMessagePropsType = {
 };
 
 
+
 export type ModalPropsType = {
-  isOpen: boolean
-  onRequestClose: () => void
-  children: JSX.Element
+  content: (fn:() => void) => JSX.Element
+  children: (fn:() => void) => JSX.Element
 }
